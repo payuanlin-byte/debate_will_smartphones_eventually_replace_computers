@@ -3,177 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IB 中文 B 語篇積木卡 (The Building Blocks)</title>
+    <title>The Building Blocks</title>
     <style>
-        body {
-            font-family: 'PingFang HK', 'Microsoft JhengHei', sans-serif;
-            background-color: #f4f7f6;
-            color: #333;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        h1 {
-            text-align: center;
-            color: #2c3e50;
-            font-size: 24px;
-        }
-        .topic-card {
-            background-color: #e8f4f8;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            border-left: 5px solid #3498db;
-            font-weight: bold;
-        }
-        .step-container {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            margin-bottom: 15px;
-            display: none; /* 預設隱藏，透過 JS 逐步顯示 */
-            animation: fadeIn 0.5s;
-        }
-        .step-container.active {
-            display: block;
-        }
-        .step-title {
-            font-size: 18px;
-            color: #e67e22;
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-        .hint-box {
-            background-color: #fff8e1;
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 14px;
-            margin-bottom: 15px;
-            border-left: 3px solid #f1c40f;
-        }
-        textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-            min-height: 80px;
-            resize: vertical;
-            box-sizing: border-box;
-        }
-        button {
-            background-color: #2ecc71;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-            width: 100%;
-        }
-        button:hover {
-            background-color: #27ae60;
-        }
-        #final-product {
-            background-color: #e8f8f5;
-            padding: 20px;
-            border-radius: 10px;
-            border: 2px dashed #1abc9c;
-            margin-top: 30px;
-            font-size: 18px;
-            line-height: 1.6;
-            display: none;
-        }
-        .btn-group {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        .btn-secondary {
-            background-color: #34495e;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        body { font-family: 'PingFang HK', 'Microsoft JhengHei', sans-serif; background-color: #f4f7f6; color: #333; max-width: 650px; margin: 0 auto; padding: 20px; }
+        h1 { text-align: center; color: #2c3e50; font-size: 24px; }
+        .topic-card { background-color: #e8f4f8; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 5px solid #3498db; font-weight: bold; }
+        .step-container { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 15px; display: none; animation: fadeIn 0.5s; }
+        .step-container.active { display: block; }
+        .step-title { font-size: 18px; color: #e67e22; margin-bottom: 10px; font-weight: bold; }
+        .hint-box { background-color: #fff8e1; padding: 10px; border-radius: 5px; font-size: 14px; margin-bottom: 10px; border-left: 3px solid #f1c40f; }
+        
+        /* 錦囊按鈕與內容樣式 */
+        .helping-btn { background-color: #9b59b6; color: white; border: none; padding: 10px 15px; font-size: 15px; border-radius: 5px; cursor: pointer; margin-bottom: 10px; width: 100%; text-align: left; font-weight: bold; }
+        .helping-btn:hover { background-color: #8e44ad; }
+        .helping-content { background-color: #fdfefe; padding: 15px; border-radius: 5px; font-size: 14px; margin-bottom: 15px; display: none; border: 2px dashed #9b59b6; }
+        .hint-section-title { color: #d35400; font-weight: bold; margin-top: 10px; margin-bottom: 5px; border-bottom: 1px solid #eee; padding-bottom: 3px; }
+        .helping-content ul { padding-left: 20px; margin: 5px 0 10px 0; line-height: 1.5; }
+        .helping-content li { margin-bottom: 5px; }
+        .eng-text { color: #2980b9; font-family: Arial, sans-serif; }
+        
+        textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-size: 16px; min-height: 90px; resize: vertical; box-sizing: border-box; }
+        .next-btn { background-color: #2ecc71; color: white; border: none; padding: 12px 20px; font-size: 16px; border-radius: 5px; cursor: pointer; margin-top: 10px; width: 100%; font-weight: bold; }
+        .next-btn:hover { background-color: #27ae60; }
+        #final-product { background-color: #e8f8f5; padding: 20px; border-radius: 10px; border: 2px dashed #1abc9c; margin-top: 30px; font-size: 18px; line-height: 1.6; display: none; }
+        .btn-secondary { background-color: #34495e; color: white; border: none; padding: 10px 20px; font-size: 16px; border-radius: 5px; cursor: pointer; margin-top: 15px;}
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
     <h1>🧱 語篇積木卡</h1>
-    
-    <div class="topic-card">
-        🎯 討論話題：電腦最終會被手機取代。你同意嗎？為什麼？
-    </div>
+    <div class="topic-card">🎯 討論話題：電腦最終會被手機取代。你同意嗎？為什麼？</div>
 
     <!-- Step 1 -->
     <div class="step-container active" id="step1">
         <div class="step-title">Step 1: 我的立場 (表明觀點)</div>
-        <div class="hint-box">💡 句型提示：我部分同意…… / 我不同意這個觀點，我認為……</div>
-        <textarea id="text1" placeholder="請輸入你的觀點..."></textarea>
-        <button onclick="nextStep(1)">鎖定並進入下一步 ⬇️</button>
+        <div class="hint-box">💡 句型：我部分同意…… / 我不同意這個觀點，我認為……</div>
+        
+        <button class="helping-btn" onclick="toggleHint('help1')">💡 腦子空空？點擊打開錦囊 (Helping Questions)</button>
+        <div id="help1" class="helping-content">
+            <div class="hint-section-title">🛠️ 高效選擇 (中文直給)</div>
+            <ul>
+                <li><b>選一個立場：</b> A. 完全同意取代 &nbsp; B. 不同意，電腦不可取代</li>
+                <li><b>想一想：</b> 未來的專業攝影工作室，桌上會是全空只剩手機，還是依然有大螢幕的蘋果電腦？</li>
+            </ul>
+            <div class="hint-section-title">🧠 進階邏輯 (English Scaffold)</div>
+            <ul class="eng-text">
+                <li>If you argue against phones taking over, pick a structure: <br><b>"From my perspective, computers are irreplaceable..." (在我看來，電腦不可替代)</b> OR <br><b>"I partially agree, but..." (我部分同意，但是...)</b></li>
+            </ul>
+        </div>
+
+        <textarea id="text1" placeholder="輸入你的觀點..."></textarea>
+        <button class="next-btn" onclick="nextStep(1)">鎖定並進入下一步 ⬇️</button>
     </div>
 
     <!-- Step 2 -->
     <div class="step-container" id="step2">
         <div class="step-title">Step 2: 核心原因 (提出原因)</div>
-        <div class="hint-box">💡 句型提示：這主要是因為…… / 這是因為……</div>
+        <div class="hint-box">💡 句型：這主要是因為…… / 這是因為……</div>
+        
+        <button class="helping-btn" onclick="toggleHint('help2')">💡 腦子空空？點擊打開錦囊</button>
+        <div id="help2" class="helping-content">
+            <div class="hint-section-title">🛠️ 高效選擇 (中文直給)</div>
+            <ul>
+                <li><b>修圖的痛點：</b> A. 螢幕太小，看不清邊緣細節； B. 處理幾百MB的高清照片時太卡。</li>
+                <li><b>電腦的優勢：</b> A. 有更專業的軟體支援； B. 處理複雜任務更高效。</li>
+            </ul>
+            <div class="hint-section-title">🧠 進階邏輯 (English Scaffold)</div>
+            <ul class="eng-text">
+                <li>Upgrade your phrasing: Instead of "computers are faster", use <br><b>"Computers provide higher processing efficiency" (電腦有更高的處理效率)</b>.</li>
+                <li>Connective: <b>"The primary reason is that..." (最主要的原因在於...)</b></li>
+            </ul>
+        </div>
+
         <textarea id="text2" placeholder="給出一個最直接的理由..."></textarea>
-        <button onclick="nextStep(2)">鎖定並進入下一步 ⬇️</button>
+        <button class="next-btn" onclick="nextStep(2)">鎖定並進入下一步 ⬇️</button>
     </div>
 
     <!-- Step 3 -->
     <div class="step-container" id="step3">
-        <div class="step-title">Step 3: 我的故事 (結合個人攝影經驗)</div>
-        <div class="hint-box">💡 句型提示：根據我的經驗，我經常使用手機……但我主要利用電腦……</div>
-        <textarea id="text3" placeholder="說說你平時是怎麼修圖的..."></textarea>
-        <button onclick="nextStep(3)">鎖定並進入下一步 ⬇️</button>
+        <div class="step-title">Step 3: 我的故事 (結合個人經驗)</div>
+        <div class="hint-box">💡 句型：根據我的經驗，我主要利用電腦……</div>
+        
+        <button class="helping-btn" onclick="toggleHint('help3')">💡 腦子空空？點擊打開錦囊</button>
+        <div id="help3" class="helping-content">
+            <div class="hint-section-title">🛠️ 高效選擇 (中文直給)</div>
+            <ul>
+                <li><b>擴展日常活動：</b> 週末除了修圖，打開電腦最常做什麼？ A. 查資料； B. 寫長篇報告； C. 參加線上會議。</li>
+                <li><b>拼成句子：</b> 「根據我的經驗，我平時不僅用電腦精修照片，還會用它來...」</li>
+            </ul>
+            <div class="hint-section-title">🧠 進階邏輯 (English Scaffold)</div>
+            <ul class="eng-text">
+                <li>Build a compound sentence: <br><b>"I not only use my computer for photo editing, but also for research." (我不僅用電腦修圖，還用來查資料。)</b></li>
+            </ul>
+        </div>
+
+        <textarea id="text3" placeholder="說說你平時是怎麼用電腦的..."></textarea>
+        <button class="next-btn" onclick="nextStep(3)">鎖定並進入下一步 ⬇️</button>
     </div>
 
     <!-- Step 4 -->
     <div class="step-container" id="step4">
         <div class="step-title">Step 4: 強力對比 (比較與對比)</div>
-        <div class="hint-box">💡 句型提示：與手機相比，電腦最大的優勢在於……；另一方面，手機更……</div>
+        <div class="hint-box">💡 句型：與電腦相比，手機最大的優勢在於……；另一方面……</div>
+        
+        <button class="helping-btn" onclick="toggleHint('help4')">💡 腦子空空？點擊打開錦囊</button>
+        <div id="help4" class="helping-content">
+            <div class="hint-section-title">🛠️ 高效選擇 (中文直給)</div>
+            <ul>
+                <li><b>手機的好處：</b> A. 容易攜帶（便攜性高）； B. 隨時能拍照發送。</li>
+                <li><b>手機的致命傷：</b> A. 螢幕太小影響視力； B. 訊息太多容易分心。</li>
+                <li><b>組合句型：</b> 「一方面手機攜帶方便，但另一方面...」</li>
+            </ul>
+            <div class="hint-section-title">🧠 進階邏輯 (English Scaffold)</div>
+            <ul class="eng-text">
+                <li>Show contrast: <br><b>"Despite their convenience, smartphones fall short in professional work." (儘管手機很方便，但在專業工作上依然不足。)</b></li>
+                <li>Transition word: <b>"Nevertheless / On the other hand" (然而 / 另一方面)</b>.</li>
+            </ul>
+        </div>
+
         <textarea id="text4" placeholder="對比一下兩者的優缺點..."></textarea>
-        <button onclick="nextStep(4)">鎖定並進入下一步 ⬇️</button>
+        <button class="next-btn" onclick="nextStep(4)">鎖定並進入下一步 ⬇️</button>
     </div>
 
     <!-- Step 5 -->
     <div class="step-container" id="step5">
         <div class="step-title">Step 5: 一錘定音 (總結點題)</div>
-        <div class="hint-box">💡 句型提示：總而言之…… / 因此……</div>
+        <div class="hint-box">💡 句型：總而言之…… / 因此……</div>
+        
+        <button class="helping-btn" onclick="toggleHint('help5')">💡 腦子空空？點擊打開錦囊</button>
+        <div id="help5" class="helping-content">
+            <div class="hint-section-title">🛠️ 高效選擇 (中文直給)</div>
+            <ul>
+                <li><b>下結論：</b> A. 相互取代（你死我活）； B. 共存與互補（各自發揮作用）。</li>
+                <li><b>結尾句：</b> 「總之，手機和電腦各有優勢，它們更有可能形成互補關係。」</li>
+            </ul>
+            <div class="hint-section-title">🧠 進階邏輯 (English Scaffold)</div>
+            <ul class="eng-text">
+                <li>Final impression: <br><b>"Ultimately, each device has its irreplaceable value." (總而言之，每種設備都有其不可替代的價值。)</b></li>
+            </ul>
+        </div>
+
         <textarea id="text5" placeholder="給出一個漂亮的結尾..."></textarea>
-        <button onclick="generateProduct()">一鍵生成完整語篇 🚀</button>
+        <button class="next-btn" onclick="generateProduct()">一鍵生成完整語篇 🚀</button>
     </div>
 
     <!-- 最終產出區域 -->
     <div id="final-product">
         <h3 style="color:#16a085; margin-top:0;">✨ 你的完整語篇：</h3>
         <div id="output-text"></div>
-        <div class="btn-group">
-            <button class="btn-secondary" onclick="copyText()">📋 複製文本</button>
-        </div>
+        <button class="btn-secondary" onclick="copyText()">📋 複製文本</button>
     </div>
 
     <script>
+        function toggleHint(hintId) {
+            const hintDiv = document.getElementById(hintId);
+            if (hintDiv.style.display === "none" || hintDiv.style.display === "") {
+                hintDiv.style.display = "block";
+            } else {
+                hintDiv.style.display = "none";
+            }
+        }
+
         function nextStep(currentStep) {
             const currentTextArea = document.getElementById('text' + currentStep);
             if (currentTextArea.value.trim() === '') {
-                alert('請先填寫這一塊積木！哪怕是很短的一句話也可以。');
+                alert('請先填寫這一塊積木！點擊上方的錦囊看看選項吧。');
                 return;
             }
-            // 隱藏按鈕，鎖定文本框
             currentTextArea.disabled = true;
-            event.target.style.display = 'none';
+            event.target.style.display = 'none'; 
             
-            // 顯示下一步
+            const helpBtn = currentTextArea.previousElementSibling.previousElementSibling;
+            if(helpBtn && helpBtn.classList.contains('helping-btn')) helpBtn.style.display = 'none';
+            const helpContent = currentTextArea.previousElementSibling;
+            if(helpContent && helpContent.classList.contains('helping-content')) helpContent.style.display = 'none';
+
             const nextStepId = currentStep + 1;
             const nextDiv = document.getElementById('step' + nextStepId);
             if (nextDiv) {
                 nextDiv.classList.add('active');
-                // 滾動到下一步
                 nextDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
         }
@@ -186,14 +195,17 @@
             }
             t5.disabled = true;
             event.target.style.display = 'none';
+            
+            const helpBtn = t5.previousElementSibling.previousElementSibling;
+            if(helpBtn) helpBtn.style.display = 'none';
+            const helpContent = t5.previousElementSibling;
+            if(helpContent) helpContent.style.display = 'none';
 
-            // 拼接所有文本
             let fullText = "";
             for (let i = 1; i <= 5; i++) {
                 fullText += document.getElementById('text' + i).value.trim() + " ";
             }
 
-            // 顯示結果
             const finalDiv = document.getElementById('final-product');
             document.getElementById('output-text').innerText = fullText;
             finalDiv.style.display = 'block';
@@ -203,7 +215,7 @@
         function copyText() {
             const textToCopy = document.getElementById('output-text').innerText;
             navigator.clipboard.writeText(textToCopy).then(() => {
-                alert('複製成功！現在你可以把它粘貼到 Word 或直接發給老師了。');
+                alert('複製成功！請將它貼上並發給老師。');
             });
         }
     </script>
