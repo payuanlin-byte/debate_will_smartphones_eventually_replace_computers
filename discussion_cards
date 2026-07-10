@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IB 中文 B 語篇積木卡 (The Building Blocks)</title>
+    <style>
+        body {
+            font-family: 'PingFang HK', 'Microsoft JhengHei', sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 24px;
+        }
+        .topic-card {
+            background-color: #e8f4f8;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 5px solid #3498db;
+            font-weight: bold;
+        }
+        .step-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+            display: none; /* 預設隱藏，透過 JS 逐步顯示 */
+            animation: fadeIn 0.5s;
+        }
+        .step-container.active {
+            display: block;
+        }
+        .step-title {
+            font-size: 18px;
+            color: #e67e22;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .hint-box {
+            background-color: #fff8e1;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            margin-bottom: 15px;
+            border-left: 3px solid #f1c40f;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            min-height: 80px;
+            resize: vertical;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #27ae60;
+        }
+        #final-product {
+            background-color: #e8f8f5;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px dashed #1abc9c;
+            margin-top: 30px;
+            font-size: 18px;
+            line-height: 1.6;
+            display: none;
+        }
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .btn-secondary {
+            background-color: #34495e;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🧱 語篇積木卡</h1>
+    
+    <div class="topic-card">
+        🎯 討論話題：電腦最終會被手機取代。你同意嗎？為什麼？
+    </div>
+
+    <!-- Step 1 -->
+    <div class="step-container active" id="step1">
+        <div class="step-title">Step 1: 我的立場 (表明觀點)</div>
+        <div class="hint-box">💡 句型提示：我部分同意…… / 我不同意這個觀點，我認為……</div>
+        <textarea id="text1" placeholder="請輸入你的觀點..."></textarea>
+        <button onclick="nextStep(1)">鎖定並進入下一步 ⬇️</button>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step-container" id="step2">
+        <div class="step-title">Step 2: 核心原因 (提出原因)</div>
+        <div class="hint-box">💡 句型提示：這主要是因為…… / 這是因為……</div>
+        <textarea id="text2" placeholder="給出一個最直接的理由..."></textarea>
+        <button onclick="nextStep(2)">鎖定並進入下一步 ⬇️</button>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step-container" id="step3">
+        <div class="step-title">Step 3: 我的故事 (結合個人攝影經驗)</div>
+        <div class="hint-box">💡 句型提示：根據我的經驗，我經常使用手機……但我主要利用電腦……</div>
+        <textarea id="text3" placeholder="說說你平時是怎麼修圖的..."></textarea>
+        <button onclick="nextStep(3)">鎖定並進入下一步 ⬇️</button>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="step-container" id="step4">
+        <div class="step-title">Step 4: 強力對比 (比較與對比)</div>
+        <div class="hint-box">💡 句型提示：與手機相比，電腦最大的優勢在於……；另一方面，手機更……</div>
+        <textarea id="text4" placeholder="對比一下兩者的優缺點..."></textarea>
+        <button onclick="nextStep(4)">鎖定並進入下一步 ⬇️</button>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="step-container" id="step5">
+        <div class="step-title">Step 5: 一錘定音 (總結點題)</div>
+        <div class="hint-box">💡 句型提示：總而言之…… / 因此……</div>
+        <textarea id="text5" placeholder="給出一個漂亮的結尾..."></textarea>
+        <button onclick="generateProduct()">一鍵生成完整語篇 🚀</button>
+    </div>
+
+    <!-- 最終產出區域 -->
+    <div id="final-product">
+        <h3 style="color:#16a085; margin-top:0;">✨ 你的完整語篇：</h3>
+        <div id="output-text"></div>
+        <div class="btn-group">
+            <button class="btn-secondary" onclick="copyText()">📋 複製文本</button>
+        </div>
+    </div>
+
+    <script>
+        function nextStep(currentStep) {
+            const currentTextArea = document.getElementById('text' + currentStep);
+            if (currentTextArea.value.trim() === '') {
+                alert('請先填寫這一塊積木！哪怕是很短的一句話也可以。');
+                return;
+            }
+            // 隱藏按鈕，鎖定文本框
+            currentTextArea.disabled = true;
+            event.target.style.display = 'none';
+            
+            // 顯示下一步
+            const nextStepId = currentStep + 1;
+            const nextDiv = document.getElementById('step' + nextStepId);
+            if (nextDiv) {
+                nextDiv.classList.add('active');
+                // 滾動到下一步
+                nextDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        function generateProduct() {
+            const t5 = document.getElementById('text5');
+            if (t5.value.trim() === '') {
+                alert('請完成最後一塊積木！');
+                return;
+            }
+            t5.disabled = true;
+            event.target.style.display = 'none';
+
+            // 拼接所有文本
+            let fullText = "";
+            for (let i = 1; i <= 5; i++) {
+                fullText += document.getElementById('text' + i).value.trim() + " ";
+            }
+
+            // 顯示結果
+            const finalDiv = document.getElementById('final-product');
+            document.getElementById('output-text').innerText = fullText;
+            finalDiv.style.display = 'block';
+            finalDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function copyText() {
+            const textToCopy = document.getElementById('output-text').innerText;
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                alert('複製成功！現在你可以把它粘貼到 Word 或直接發給老師了。');
+            });
+        }
+    </script>
+</body>
+</html>
